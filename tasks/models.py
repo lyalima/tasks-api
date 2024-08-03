@@ -11,10 +11,12 @@ class BaseModel(models.Model):
         self.deleted = True
         self.save()
 
+
 class BaseModelManager(models.Manager):
 
     def get_queryset(self):
         return super().get_queryset().filter(deleted=False)
+
 
 class Task(BaseModel):
     title = models.CharField(max_length=100)

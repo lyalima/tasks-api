@@ -6,7 +6,7 @@ from .models import Task
 from .serializers import TaskSerializer
 from .filters import TaskFilter
 from rest_framework.response import Response
-from rest_framework import status 
+from rest_framework import status
 
 
 class TaskCreateListView(generics.ListCreateAPIView):
@@ -32,8 +32,7 @@ class TaskCreateListView(generics.ListCreateAPIView):
         if not queryset:
             return Response({
                 "message": "No tasks found."
-            }, status=status.HTTP_404_NOT_FOUND)
-        
+            }, status=status.HTTP_404_NOT_FOUND)        
         return Response(serializer.data)
 
 
@@ -46,7 +45,5 @@ class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response({
-            "message":"Task deleted successfully"
-        },
-        status=status.HTTP_204_NO_CONTENT)
-
+            "message": "Task deleted successfully"
+        }, status=status.HTTP_204_NO_CONTENT)

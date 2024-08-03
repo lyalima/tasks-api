@@ -10,10 +10,9 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description', 
                   'due_date', 'created_at', 'updated_at')
     
-
-    def validate_due_date(self,value):
-        current_date = date.today()
-        
+    def validate_due_date(self, value):
+        current_date = date.today()        
         if value < current_date:
-            raise serializers.ValidationError('A data de vencimento não pode ser anterior à data atual.')
+            raise serializers.ValidationError(
+                'The validation date cannot be earlier than the due date.')
         return value

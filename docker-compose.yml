@@ -1,0 +1,29 @@
+services:
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: task
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  task-manager-api:
+    container_name: task-manager-api-container
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_NAME: task
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_HOST: db
+      DB_PORT: 5432
+
+volumes:
+  postgres_data: {}

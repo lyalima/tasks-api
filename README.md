@@ -23,7 +23,7 @@ git clone https://github.com/lyalima/gerenciador_de_tarefas.git
 cd gerenciador_de_tarefas
 ```
 
-### Criando ambiente virtual 
+### Criando e ativando o ambiente virtual 
 
 #### No Linux
 

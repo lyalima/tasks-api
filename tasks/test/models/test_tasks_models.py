@@ -3,7 +3,7 @@ from tasks.models import Task
 from datetime import date, timedelta
 
 
-class ActorModelTestCase(TestCase):
+class TaskModelTestCase(TestCase):
 
     def test_create_task(self):
         task = Task.objects.create(

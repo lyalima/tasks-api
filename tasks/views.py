@@ -1,5 +1,6 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
+from .permissions import TaskCreatorPermission
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Task
@@ -10,7 +11,7 @@ from rest_framework import status
 
 
 class TaskCreateListView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, DjangoModelPermissions, TaskCreatorPermission)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -31,13 +32,13 @@ class TaskCreateListView(generics.ListCreateAPIView):
 
         if not queryset:
             return Response({
-                "message": "No tasks found."
+                "message": "Nenhuma tarefa encontrada."
             }, status=status.HTTP_404_NOT_FOUND)        
         return Response(serializer.data)
 
 
 class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, DjangoModelPermissions, TaskCreatorPermission)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -45,5 +46,5 @@ class TaskRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response({
-            "message": "Task deleted successfully"
+            "message": "Tarefa deletada com sucesso."
         }, status=status.HTTP_204_NO_CONTENT)

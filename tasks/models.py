@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class BaseModel(models.Model):
@@ -20,6 +21,7 @@ class BaseModelManager(models.Manager):
 
 class Task(BaseModel):
     title = models.CharField(max_length=100)
+    creator = models.ForeignKey(User, on_delete=models.PROTECT, null=True, verbose_name='Criador')
     description = models.TextField(null=True, blank=True)
     due_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)

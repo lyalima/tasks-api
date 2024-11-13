@@ -4,7 +4,7 @@ Uma API RESTful para gerenciamento de tarefas, construída com Django e Django R
 
 ## Funcionalidades
 
-- Criação, listagem, atualização e deleção de tarefas;
+- Criação, listagem, atualização e deleção de tarefas com APIView;
 - Listagem de tarefas de acordo com o usuário que criou a tarefa;
 - Filtragem e ordenação de tarefas com django_filters;
 - Autenticação JWT para segurança;
